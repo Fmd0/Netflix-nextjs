@@ -1,6 +1,6 @@
 'use server'
 import {hash} from 'bcrypt';
-import prisma from "@/lib/prisma";
+import prisma from "@/libs/prisma";
 import {signIn} from "@/auth";
 import {AuthError} from "next-auth";
 import {isRedirectError} from "next/dist/client/components/redirect";

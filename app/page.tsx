@@ -1,10 +1,17 @@
-import auth from "@/middleware";
-import {redirect} from "next/navigation";
+import Navbar from "@/components/Navbar";
+import MainContent from "@/components/MainContent";
+import Trending from "@/components/Trending";
+import VideoFullScreen from "@/components/VideoFullScreen";
 
 
-const Page = async () => {
+const Page = () => {
   return (
-      <div>Home Page</div>
+      <>
+          <Navbar />
+          <VideoFullScreen />
+          <MainContent />
+          <Trending />
+      </>
   )
 }
 

@@ -2,7 +2,7 @@
 
 import {useState} from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import {registerAndSignInAction, signInAction} from "@/lib/action";
+import {registerAndSignInAction, signInAction} from "@/libs/action";
 import Image from "next/image";
 
 const Page = () => {
