@@ -22,7 +22,8 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
-
+  movies        Movie[]        @relation(fields: [movieIds], references: [id])
+  movieIds      String[]       @db.ObjectId
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -78,4 +79,6 @@ model Movie {
   thumbnailUrl   String
   genre          String
   duration       String
+  users          User[]     @relation(fields: [userIds], references: [id])
+  userIds        String[]   @db.ObjectId
 }

@@ -1,16 +1,18 @@
 import Navbar from "@/components/Navbar";
 import MainContent from "@/components/MainContent";
 import Trending from "@/components/Trending";
-import VideoFullScreen from "@/components/VideoFullScreen";
+import MyList from "@/components/MyList";
+import MoreInfoModal from "@/components/MoreInfoModal";
 
 
 const Page = () => {
   return (
       <>
           <Navbar />
-          <VideoFullScreen />
           <MainContent />
           <Trending />
+          <MyList />
+          <MoreInfoModal />
       </>
   )
 }

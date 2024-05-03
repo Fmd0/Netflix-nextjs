@@ -2,7 +2,6 @@
 import useSWR from "swr";
 import fetcher from "@/libs/fetcher";
 import {MovieType} from "@/types/movie";
-import Image from "next/image";
 
 
 const Trending = () => {

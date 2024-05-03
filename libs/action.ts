@@ -2,8 +2,8 @@
 import {hash} from 'bcrypt';
 import prisma from "@/libs/prisma";
 import {signIn} from "@/auth";
-import {AuthError} from "next-auth";
 import {isRedirectError} from "next/dist/client/components/redirect";
+import auth from "@/middleware";
 
 
 export const registerAndSignInAction = async (_: null|string, formData: FormData) => {
@@ -40,5 +40,31 @@ export const signInAction = async (_: null|string, formData: FormData) => {
         }
         console.log(error);
         return 'error';
+    }
+}
+
+
+export const addFavouriteAction = async (formData: FormData) => {
+    const movieId = String(formData.get('movieId'));
+    const authData = await auth();
+    if(!authData?.user?.email) {
+        return;
+    }
+
+    const data = await prisma.user.update({
+        where: {
+            email: authData.user.email,
+        },
+        data: {
+            movies: {
+                connect: {
+                    id: movieId,
+                }
+            }
+        }
+    })
+
+    if(!data) {
+        console.log("User not valid");
     }
 }
