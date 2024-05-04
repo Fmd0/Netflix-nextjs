@@ -32,3 +32,4 @@ export const NavData = [
         href: '/browse-by-languages'
     },
 ]
+

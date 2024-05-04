@@ -13,7 +13,7 @@ const Navbar = async () => {
     // const session = await auth()
     // console.log(session);
     return (
-        <header className="fixed h-[100px] w-screen flex items-center justify-between px-10 flex-wrap">
+        <header className="fixed h-[100px] z-[1] w-screen top-0 left-0 flex items-center justify-between px-10 flex-wrap">
             <div className="flex items-center gap-8">
                 <Image src="/logo.png" alt="logo" width={1280} height={346} className='w-32'/>
                 <ul className="flex items-center gap-6">

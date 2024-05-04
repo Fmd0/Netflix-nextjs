@@ -18,6 +18,10 @@ const Trending = () => {
         )
     }
 
+    const handleMouseOn = () => {
+
+    }
+
     return (
         <div className="p-10">
             <h3 className="text-xl font-bold">Trending Now</h3>

@@ -43,11 +43,12 @@ const MainContent = () => {
                     </div>
                 </div>
             </main>
-            <div className="w-screen h-screen absolute top-0 left-0 z-[-1] opacity-75">
-                <video src="/BigBuckBunny.mp4" autoPlay muted className="w-full h-full object-cover object-center"></video>
+            <div className="w-screen h-screen absolute z-[-1] top-0 left-0 opacity-75">
+                <video src="/BigBuckBunny.mp4" autoPlay muted
+                       className="w-full h-full object-cover object-center"></video>
             </div>
         </>
-)
+    )
 }
 
 export default MainContent;
