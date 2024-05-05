@@ -19,18 +19,18 @@ const Page = () => {
 
     return (
         <main className="w-screen h-screen bg-[url('/auth/hero.jpg')] bg-center bg-cover bg-no-repeat bg-fixed">
-            <div className="w-full h-full bg-opacity-50 bg-black">
+            <div className="w-full h-full bg-opacity-50 bg-black p-10">
                 <Image src='/auth/logo.png' alt='logo' width={1280} height={346} className='w-60'/>
                 {
                     isSignIn && (
                         <form
-                            className="w-96 bg-black p-4 mx-auto text-black"
+                            className="w-96 bg-black p-10 mx-auto text-black"
                             action={signInDispatch}
                         >
-                            <h1 className='text-white'>Sign in</h1>
+                            <h1 className='text-white text-3xl font-semibold'>Sign in</h1>
 
                             <input
-                                className="block w-full p-1"
+                                className="bg-neutral-700 block w-full p-3 outline-0 mt-8 mb-4 rounded-md text-white"
                                 type="email"
                                 name="email"
                                 placeholder="Email address"
@@ -38,7 +38,7 @@ const Page = () => {
                             />
 
                             <input
-                                className="block w-full p-1"
+                                className="bg-neutral-700 block w-full p-3 outline-0 mt-4 mb-8 rounded-md text-white"
                                 type="password"
                                 name="password"
                                 placeholder="Password"
@@ -47,13 +47,13 @@ const Page = () => {
 
                             {
                                 signInError && (
-                                    <p className="text-white">{signInError}</p>
+                                    <p className="text-red-800 mb-2">{signInError}</p>
                                 )
                             }
 
                             <SignInButton />
-                            <p className='text-white'>{"Don't have a account."}
-                                <button type='button' onClick={handleClick}>Register</button>
+                            <p className='text-[14px] text-neutral-500 mt-8 flex justify-center'>First time using Netflix?
+                                <button type='button' onClick={handleClick} className="text-white pl-1">Create an account.</button>
                             </p>
                         </form>
                     )
@@ -62,13 +62,21 @@ const Page = () => {
                 {
                     !isSignIn && (
                         <form
-                            className="w-96 bg-black p-4 mx-auto text-black"
+                            className="w-96 bg-black p-10 mx-auto text-black"
                             action={registerAndSignInDispatch}
                         >
-                            <h1 className='text-white'>Register</h1>
+                            <h1 className='text-white text-3xl font-semibold'>Register</h1>
 
                             <input
-                                className="block w-full p-1"
+                                className="bg-neutral-700 block w-full p-3 outline-0 mt-8 mb-4 rounded-md text-white"
+                                type="text"
+                                name="name"
+                                placeholder="Name"
+                                required
+                            />
+
+                            <input
+                                className="bg-neutral-700 block w-full p-3 outline-0 mt-4 mb-4 rounded-md text-white"
                                 type="email"
                                 name="email"
                                 placeholder="Email address"
@@ -76,7 +84,7 @@ const Page = () => {
                             />
 
                             <input
-                                className="block w-full p-1"
+                                className="bg-neutral-700 block w-full p-3 outline-0 mt-4 mb-8 rounded-md text-white"
                                 type="password"
                                 name="password"
                                 placeholder="Password"
@@ -89,9 +97,9 @@ const Page = () => {
                                 )
                             }
 
-                            <RegisterButton />
-                            <p className='text-white'>Already have a account.
-                                <button type='button' onClick={handleClick}>SignIn</button>
+                            <RegisterButton/>
+                            <p className='text-[14px] text-neutral-500 mt-8 flex justify-center'>Already have a account?
+                                <button type='button' onClick={handleClick} className="text-white pl-1">Sign In</button>
                             </p>
                         </form>
                     )
@@ -108,7 +116,7 @@ const SignInButton = () => {
     return (
         <button
             disabled={pending}
-            className="block w-full bg-red-500 text-center"
+            className="block w-full bg-red-600 text-center p-2 rounded-md text-white"
             type='submit'
         >
             Sign In
@@ -121,7 +129,7 @@ const RegisterButton = () => {
     return (
         <button
             disabled={pending}
-            className="block w-full bg-red-500 text-center"
+            className="block w-full bg-red-600 text-center p-2 rounded-md text-white"
             type='submit'
         >
             Register

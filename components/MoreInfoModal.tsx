@@ -16,10 +16,10 @@ import React from "react";
 const MoreInfoModal = () => {
 
     const moreInfoModalIndex = useMoreInfoStore(state => state.moreInfoModalIndex);
-    const {data: movieData, error: movieError, isLoading: movieIsLoading, mutate: moviesMutate} =
+    const {data:movieData={}, error: movieError, mutate: moviesMutate} =
         useSWR(`/api/movies/${moreInfoModalIndex}`, fetcher);
 
-    const {data: userData, error, isLoading, mutate: userMutate} =
+    const {data: userData={}, error, mutate: userMutate} =
         useSWR("/api/user", fetcher);
 
     const clearMoreInfoModal = useMoreInfoStore(state => state.clearMoreInfoModal)
@@ -59,13 +59,10 @@ const MoreInfoModal = () => {
         return null;
     }
 
-    // if(movieIsLoading || isLoading) {
-    //     return null;
-    // }
 
     if(movieError || error) {
         console.log(error);
-        // return null;
+        return null;
     }
 
 
