@@ -2,36 +2,67 @@
 import {IoPlay} from "react-icons/io5";
 import Link from "next/link";
 import { IoAddCircleOutline } from "react-icons/io5";
-import {addFavouriteAction, removeFavouriteAction} from "@/libs/action";
-import useSWR from "swr";
+import useSWR, {mutate} from "swr";
 import fetcher from "@/libs/fetcher";
 import {useMoreInfoStore} from "@/hooks/useMoreInfoStore";
 import { IoCloseOutline } from "react-icons/io5";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import clsx from "clsx";
+import {useFormStatus} from "react-dom";
+import React from "react";
 
 
 
 const MoreInfoModal = () => {
 
     const moreInfoModalIndex = useMoreInfoStore(state => state.moreInfoModalIndex);
-    const {data: movieData, error: movieError, isLoading: movieIsLoading} =
+    const {data: movieData, error: movieError, isLoading: movieIsLoading, mutate: moviesMutate} =
         useSWR(`/api/movies/${moreInfoModalIndex}`, fetcher);
 
-    const {data: userData, error, isLoading} =
+    const {data: userData, error, isLoading, mutate: userMutate} =
         useSWR("/api/user", fetcher);
 
     const clearMoreInfoModal = useMoreInfoStore(state => state.clearMoreInfoModal)
 
+    const addFavoriteAction = async (formData: FormData) => {
+        const rawFormData = Object.fromEntries(formData.entries());
+        await fetch("/api/movies/favourites", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(rawFormData),
+        });
+        const moviesMutatePromise = moviesMutate();
+        const userMutatePromise = userMutate();
+        await Promise.all([moviesMutatePromise, userMutatePromise]);
+        await mutate("/api/movies/favourites")
+    }
 
-    // if(!moreInfoModalIndex) {
-    //     return null;
-    // }
+    const deleteFavoriteAction = async (formData: FormData) => {
+        const rawFormData = Object.fromEntries(formData.entries());
+        await fetch("/api/movies/favourites", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(rawFormData),
+        });
+        const moviesMutatePromise = moviesMutate();
+        const userMutatePromise = userMutate();
+        await Promise.all([moviesMutatePromise, userMutatePromise]);
+        await mutate("/api/movies/favourites")
+    }
+
+
+    if(moreInfoModalIndex === null) {
+        return null;
+    }
 
     // if(movieIsLoading || isLoading) {
     //     return null;
     // }
-    //
+
     if(movieError || error) {
         console.log(error);
         // return null;
@@ -54,19 +85,15 @@ const MoreInfoModal = () => {
                             </Link>
 
                             {!userData?.movieIds.includes(movieData?.id) &&
-                                (<form action={addFavouriteAction} className="flex items-center">
-                                    <input type="hidden" name="movieId" value={movieData?.id}/>
-                                    <button type="submit">
-                                        <IoAddCircleOutline size={36} />
-                                    </button>
+                                (<form action={addFavoriteAction} className="flex items-center">
+                                    <input type="hidden" name="movieId" defaultValue={movieData?.id}/>
+                                    <AddFavouriteButton />
                                 </form>)
                             }
                             {userData?.movieIds.includes(movieData?.id) &&
-                                (<form action={removeFavouriteAction} className="flex items-center">
-                                    <input type="hidden" name="movieId" value={movieData?.id}/>
-                                    <button type="submit">
-                                        <IoCheckmarkCircleOutline size={36} />
-                                    </button>
+                                (<form action={deleteFavoriteAction} className="flex items-center">
+                                    <input type="hidden" name="movieId" defaultValue={movieData?.id}/>
+                                    <DeleteFavouriteButton />
                                 </form>)
                             }
                         </div>
@@ -83,6 +110,24 @@ const MoreInfoModal = () => {
                 <IoCloseOutline size={28} className="text-gray-100 absolute z-[2] top-1 right-1 cursor-pointer" onClick={clearMoreInfoModal} />
             </div>
         </div>
+    )
+}
+
+const AddFavouriteButton = () => {
+    const {pending} = useFormStatus();
+    return (
+        <button type="submit" disabled={pending}>
+            <IoAddCircleOutline size={36}/>
+        </button>
+    )
+}
+
+const DeleteFavouriteButton = () => {
+    const {pending} = useFormStatus();
+    return (
+        <button type="submit" disabled={pending}>
+            <IoCheckmarkCircleOutline size={36}/>
+        </button>
     )
 }
 

@@ -3,7 +3,6 @@ import prisma from "@/libs/prisma";
 import {NextRequest, NextResponse} from "next/server";
 
 const GET = async (req: NextRequest, {params}: { params: { movieId: string } }) => {
-
     const authData = await auth();
     if (!authData?.user?.email) {
         return new Response(JSON.stringify({msg: 'User not valid'}),{
@@ -11,7 +10,7 @@ const GET = async (req: NextRequest, {params}: { params: { movieId: string } }) 
         })
     }
 
-    if(params.movieId === "null") {
+    if(params.movieId === "null" || params.movieId === 'false') {
         return NextResponse.json({})
     }
 

@@ -2,7 +2,7 @@ import {create} from "zustand";
 
 
 type state = {
-    moreInfoModalIndex: string|null,
+    moreInfoModalIndex: string|null|boolean,
 }
 
 type actions = {
@@ -13,6 +13,12 @@ type actions = {
 
 export const useMoreInfoStore = create<state & actions>((set) => ({
     moreInfoModalIndex: null,
-    setMoreInfoModal: (newData: string) => set({moreInfoModalIndex: newData}),
-    clearMoreInfoModal: () => set({moreInfoModalIndex: null}),
+    setMoreInfoModal: (newData: string) => {
+        set({moreInfoModalIndex: false})
+        setTimeout(() => set({moreInfoModalIndex: newData}), 10);
+    },
+    clearMoreInfoModal: () => {
+        set({moreInfoModalIndex: false})
+        setTimeout(() => set({moreInfoModalIndex: null}), 200);
+    },
 }))
