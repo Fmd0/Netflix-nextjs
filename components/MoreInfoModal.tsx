@@ -76,7 +76,7 @@ const MoreInfoModal = () => {
                     <div>
                         <h1 className='text-3xl font-bold mb-5' >{movieData?.title}</h1>
                         <div className="flex gap-4 items-center">
-                            <Link href="/" className="bg-gray-100 text-black rounded-md py-2 px-4 flex items-center gap-1">
+                            <Link href={`/movie/${movieData.id}`} className="bg-gray-100 text-black rounded-md py-2 px-4 flex items-center gap-1">
                                 <IoPlay size={22} />
                                 Play
                             </Link>

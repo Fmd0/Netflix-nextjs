@@ -48,7 +48,7 @@ const MovieCard = ({d}: {d: MovieType}) => {
 
     return (
         <div className="relative w-full h-full group/trendingCard transition-all">
-            <Link href="/" className="w-full h-full group-hover/trendingCard:opacity-50">
+            <Link href={`/movie/${d.id}`} className="w-full h-full group-hover/trendingCard:opacity-50">
                 <img className="w-full h-full object-cover rounded-lg" src={d.thumbnailUrl} alt="thumbnailUrl"/>
             </Link>
             <div className="w-full h-full absolute top-0 transition-all delay-300
@@ -57,7 +57,7 @@ const MovieCard = ({d}: {d: MovieType}) => {
                         group-hover/trendingCard:visible
                         scale-0
                         group-hover/trendingCard:scale-100">
-                <Link href="/" className="w-full h-full">
+                <Link href={`/movie/${d.id}`} className="w-full h-full">
                     <img className="w-full h-full object-cover rounded-lg" src={d.thumbnailUrl} alt="thumbnailUrl"/>
                 </Link>
                 <div className="w-full h-full bg-gray-900 p-5">

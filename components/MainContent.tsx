@@ -29,7 +29,7 @@ const MainContent = () => {
                     <h1 className='text-5xl font-bold'>{data.title}</h1>
                     <p className="mt-8">{data.description}</p>
                     <div className="flex items-center mt-4 gap-4">
-                        <Link href="/" className="bg-gray-100 text-black rounded-md py-2 px-4 flex items-center gap-1">
+                        <Link href={`/movie/${data.id}`} className="bg-gray-100 text-black rounded-md py-2 px-4 flex items-center gap-1">
                             <IoPlay size={22}/>
                             Play
                         </Link>
