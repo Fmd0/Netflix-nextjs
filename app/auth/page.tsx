@@ -18,13 +18,13 @@ const Page = () => {
 
 
     return (
-        <main className="w-screen h-screen bg-[url('/auth/hero.jpg')] bg-center bg-cover bg-no-repeat bg-fixed">
-            <div className="w-full h-full bg-opacity-50 bg-black p-10">
-                <Image src='/auth/logo.png' alt='logo' width={1280} height={346} className='w-60'/>
+        <main className="w-screen h-screen bg-black md:bg-[url('/auth/hero.jpg')] bg-center bg-cover bg-no-repeat bg-fixed">
+            <div className="w-full h-full p-8 md:p-10 bg-black bg-opacity-50">
+                <Image src='/auth/logo.png' alt='logo' width={1280} height={346} className='w-40 md:w-60'/>
                 {
                     isSignIn && (
                         <form
-                            className="w-96 bg-black p-10 mx-auto text-black"
+                            className="w-[90%] mt-20 bg-black mx-auto text-white md:w-96 md:p-10"
                             action={signInDispatch}
                         >
                             <h1 className='text-white text-3xl font-semibold'>Sign in</h1>
@@ -62,7 +62,7 @@ const Page = () => {
                 {
                     !isSignIn && (
                         <form
-                            className="w-96 bg-black p-10 mx-auto text-black"
+                            className="w-[90%] mt-20 bg-black mx-auto text-white md:w-96 md:p-10"
                             action={registerAndSignInDispatch}
                         >
                             <h1 className='text-white text-3xl font-semibold'>Register</h1>

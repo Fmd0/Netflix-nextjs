@@ -44,8 +44,7 @@ const MainContent = () => {
                 </div>
             </main>
             <div className="w-screen h-screen absolute z-[-1] top-0 left-0 opacity-75">
-                <video src="/BigBuckBunny.mp4" autoPlay muted
-                       className="w-full h-full object-cover object-center"></video>
+                <video src="/BigBuckBunny.mp4" playsInline autoPlay loop muted className="w-full h-full object-cover object-center" />
             </div>
         </>
     )

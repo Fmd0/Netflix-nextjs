@@ -16,6 +16,7 @@ const Navbar = () => {
 
     const [showSignOut, setShowSignOut] = useState(false);
     const [showBackground, setShowBackground] = useState(false);
+    const [showBrowserBar, setShowBrowserBar] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -36,26 +37,46 @@ const Navbar = () => {
     }
 
     return (
-        <header
-            className={clsx("fixed z-[1] w-screen top-0 left-0 flex items-center justify-between p-10 flex-wrap",
-                showBackground? "bg-black bg-opacity-40": ""
+        <header className={clsx("fixed z-[1] w-screen top-0 left-0 flex items-center justify-between p-4 lg:p-10 flex-wrap",
+                showBackground? "bg-black bg-opacity-70": ""
                 )}>
             <div className="flex items-center gap-8">
-                <Image src="/logo.png" alt="logo" width={1280} height={346} className='w-32'/>
-                <ul className="flex items-center gap-6">
+                <Image src="/logo.png" alt="logo" width={1280} height={346} className='w-24 lg:w-32 '/>
+
+                <ul className="hidden items-center gap-6 lg:flex">
                     {
                         NavData.map((data) => (
                             <li key={data.id}><Link href={data.href}>{data.name}</Link></li>
                         ))
                     }
                 </ul>
+
+                <div className="relative lg:hidden">
+                    <button className="flex items-center" onClick={() => setShowBrowserBar(a=> !a)} >
+                        Browser <MdArrowDropDown size={32} className={clsx("transition-all duration-300",
+                        showBrowserBar?"rotate-180":"rotate-0"
+                        )} />
+                    </button>
+                    <ul className={clsx("flex flex-col w-56 items-center gap-4 absolute top-10 left-0 bg-black px-4 py-6",
+                        showBrowserBar?"visible":"invisible"
+                        )}>
+                        {
+                            NavData.map((data) => (
+                                <li key={data.id}><Link href={data.href}>{data.name}</Link></li>
+                            ))
+                        }
+                    </ul>
+                </div>
+
             </div>
             <div className="flex items-center gap-6 relative">
                 <IoSearchOutline className="text-xl"/>
                 <IoNotificationsOutline className="text-xl"/>
                 <div className="flex items-center gap-2 cursor-pointer" onClick={handleClick}>
                     <p>User</p>
-                    <MdArrowDropDown className="text-lg"/>
+                    <MdArrowDropDown size={32} className={clsx("text-lg transition-all duration-300",
+                        showSignOut?"rotate-180":"rotate-0"
+                        )}/>
                 </div>
                 <div className={clsx("bg-black absolute top-10 right-0 w-56 h-32 border-2 border-gray-800 z-[1]",
                     showSignOut ? "block" : "hidden"
