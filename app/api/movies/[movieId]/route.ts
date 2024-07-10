@@ -1,33 +1,38 @@
 import auth from "@/middleware";
-import prisma from "@/libs/prisma";
-import {NextRequest, NextResponse} from "next/server";
+import prisma from "@/utils/prisma";
+import {NextRequest} from "next/server";
 
-const GET = async (req: NextRequest, {params}: { params: { movieId: string } }) => {
-    const authData = await auth();
-    if (!authData?.user?.email) {
-        return new Response(JSON.stringify({msg: 'User not valid'}),{
-            status: 500,
-        })
-    }
-
-    if(params.movieId === "null" || params.movieId === 'false') {
-        return NextResponse.json({})
-    }
-
-    const data = await prisma.movie.findUnique({
-        where: {
-            id: params.movieId,
+const GET = async (_: NextRequest, {params: {movieId}}: { params: { movieId: string } }) => {
+    try {
+        const authData = await auth();
+        if (!authData?.user?.email) {
+            return Response.json({msg: 'User not valid'},{
+                status: 401,
+            })
         }
-    })
 
-    if(!data) {
-        return new Response(JSON.stringify({msg: 'Movie not valid'}),{
+        if(!movieId) {
+            return Response.json({msg: 'Movie not valid'}, {
+                status: 500,
+            })
+        }
+
+        const data = await prisma.movie.findUnique({
+            where: {
+                id: movieId,
+            }
+        })
+
+        return Response.json(data);
+    }
+    catch(err) {
+        console.log(err);
+        return Response.json({msg: 'Get movie item error'}, {
             status: 500,
         })
     }
-
-    return NextResponse.json(data);
 }
+
 
 export {
     GET

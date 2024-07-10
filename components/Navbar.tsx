@@ -1,6 +1,6 @@
 'use client'
 import Image from "next/image";
-import {NavData} from "@/libs/data";
+import {NavData} from "@/utils/data";
 import { IoSearchOutline } from "react-icons/io5";
 import { IoNotificationsOutline } from "react-icons/io5";
 import { MdArrowDropDown } from "react-icons/md";

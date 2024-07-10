@@ -2,25 +2,31 @@
 
 import {useState} from "react";
 import { useFormState, useFormStatus } from "react-dom";
-import {registerAndSignInAction, signInAction} from "@/libs/action";
+import {registerAndSignInAction, signInAction} from "@/utils/action";
 import Image from "next/image";
+import Link from "next/link";
 
 const Page = () => {
 
-    const [isSignIn, serIsSignIn] = useState(true);
+    const [isSignIn, setIsSignIn] = useState(true);
 
     const [registerAndSignInErrorMessage, registerAndSignInDispatch] = useFormState(registerAndSignInAction, null);
     const [signInError, signInDispatch] = useFormState(signInAction, null);
 
     const handleClick = () => {
-        serIsSignIn(a => !a);
+        setIsSignIn(a => !a);
     }
 
 
     return (
         <main className="w-screen h-screen bg-black md:bg-[url('/auth/hero.jpg')] bg-center bg-cover bg-no-repeat bg-fixed">
             <div className="w-full h-full p-8 md:p-10 bg-black bg-opacity-50">
-                <Image src='/auth/logo.png' alt='logo' width={1280} height={346} className='w-40 md:w-60'/>
+
+                <Link href="/landing">
+                    <Image src='/auth/logo.png' alt='logo' width={1280} height={346} className='w-40 md:w-60'/>
+                </Link>
+
+                {/*signIn and signUp form*/}
                 {
                     isSignIn && (
                         <form

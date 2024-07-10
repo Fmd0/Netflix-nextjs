@@ -4,7 +4,7 @@ import { IoPlay } from "react-icons/io5";
 import { IoInformationCircleOutline } from "react-icons/io5";
 import {useMoreInfoStore} from "@/hooks/useMoreInfoStore";
 import useSWR from "swr";
-import fetcher from "@/libs/fetcher";
+import fetcher from "@/utils/fetcher";
 
 
 const MainContent = () => {

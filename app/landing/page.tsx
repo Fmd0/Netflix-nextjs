@@ -1,17 +1,13 @@
-'use client'
 import Image from "next/image";
 import Link from "next/link";
 import { FaAngleRight } from "react-icons/fa6";
-import {useState} from "react";
-import { MdOutlineClose, MdAdd } from "react-icons/md";
-import {questions} from "@/libs/data";
+import QuestionList from "@/components/landing/QuestionList";
+import Footer from "@/components/common/Footer";
 
 
 
 
 const Page = () => {
-
-    const [showDropDown, setShowDropDown] = useState("")
 
     return (
         <>
@@ -21,8 +17,10 @@ const Page = () => {
                 <div className="w-full h-full bg-black bg-opacity-50">
 
                     <nav className="w-[90%] lg:w-[80%] mx-auto h-[80px] flex items-center justify-between">
-                        <Image src="/landing/logo.png" alt="logo" width={1280} height={346} className="w-32 lg:w-36"/>
-                        <Link href="/auth" className="bg-red-600 py-2 px-4 rounded-md text-[13px]">
+                        <Link href="/landing">
+                            <Image src="/landing/logo.png" alt="logo" width={1280} height={346} className="w-32 lg:w-36"/>
+                        </Link>
+                        <Link href="/auth" className="bg-red-600 py-2 px-4 rounded-md text-[13px] font-semibold">
                             Sign In
                         </Link>
                     </nav>
@@ -44,7 +42,7 @@ const Page = () => {
             </header>
 
 
-            {/*showcase list starts*/}
+            {/*showcase list starts, totally four items*/}
             <div className="border-b-[10px] border-b-neutral-800">
                 <div className="w-[90%] lg:w-[80%] flex flex-col items-center mx-auto p-10 lg:pt-12 lg:pb-20 lg:grid lg:items-center lg:justify-items-center lg:grid-cols-2">
                     <div>
@@ -65,7 +63,7 @@ const Page = () => {
                 <div className="w-[90%] lg:w-[80%] flex flex-col items-center mx-auto p-10 lg:p-20 lg:grid lg:items-center lg:justify-items-center lg:grid-cols-2">
 
                     <div className="relative">
-                        <Image src="/landing/threeDevices.png" alt="tv" width={640} height={480} className="w-[480px] lg:w-[540px]"/>
+                        <Image src="/landing/threeDevices.png" alt="tv" width={640} height={480} className="w-[480px] lg:w-[540px] xl:w-[640px]"/>
                         <video src="/landing/threeDevices.m4v" autoPlay playsInline loop muted className="absolute w-[61%] top-[10%] left-[19%] z-[-1]" />
                     </div>
                     <div>
@@ -78,14 +76,14 @@ const Page = () => {
 
             <div className="border-b-[10px] border-b-neutral-800">
                 <div
-                    className="w-[90%] lg:w-[80%] flex flex-col items-center mx-auto p-10 lg:p-20 lg:grid lg:items-center lg:justify-items-center lg:grid-cols-2">
+                    className="w-[90%] lg:w-[80%] flex flex-col items-center mx-auto p-10 lg:p-20 lg:grid lg:grid-cols-2 lg:items-center lg:justify-items-center">
 
                     <div>
                         <h1 className="text-4xl lg:text-5xl font-bold mb-4">Create profiles for kids</h1>
                         <p className="text-xl lg:text-2xl">Send kids on adventures with their favorite characters in a space made
                             just for them—free with your membership.</p>
                     </div>
-                    <Image src="/landing/kids.png" alt="tv" width={640} height={480} className="w-[480px] lg:w-[540px]"/>
+                    <Image src="/landing/kids.png" alt="kids" width={640} height={480} className="w-[480px] lg:w-[540px]"/>
                 </div>
             </div>
 
@@ -114,30 +112,11 @@ const Page = () => {
                     </div>
                 </div>
             </div>
+            {/*showcase list ends*/}
 
 
             {/*question list*/}
-            <div>
-                <div className="w-[80%] mx-auto py-20">
-                    <h1 className="text-4xl lg:text-5xl font-bold mb-8 text-center">Frequently Asked Questions</h1>
-
-                    {questions.map(question => (
-                        <div className="mb-2 text-xl lg:text-2xl" key={question.question}>
-                            <div className="flex justify-between items-center mb-[2px] bg-neutral-800 p-6 cursor-pointer hover:bg-neutral-700"
-                                onClick={() => setShowDropDown(a => a === question.question ? "" : question.question)}
-                            >
-                                {question.question}
-                                {showDropDown === question.question ? <MdOutlineClose className="text-[32px] lg:text-[38px]" /> : <MdAdd className="text-[34px] lg:text-[38px]" />}
-                            </div>
-
-                            <div className={`bg-neutral-800 overflow-hidden transition-all duration-[400ms] 
-                            ${showDropDown === question.question ? "max-h-[600px]" : "max-h-0"}`}>
-                                <p className="p-6 duration-300" dangerouslySetInnerHTML={{__html: question.answer}} ></p>
-                            </div>
-                        </div>))
-                    }
-                </div>
-            </div>
+            <QuestionList />
 
 
             {/*bottom button*/}
@@ -151,6 +130,9 @@ const Page = () => {
                     </Link>
                 </div>
             </div>
+
+
+            <Footer />
         </>
     )
 }

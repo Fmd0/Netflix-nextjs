@@ -60,3 +60,71 @@ export const questions = [
         answer: "The Netflix Kids experience is included in your membership to give parents control while kids enjoy family-friendly TV shows and movies in their own space.<br/> <br/>Kids profiles come with PIN-protected parental controls that let you restrict the maturity rating of content kids can watch and block specific titles you don’t want kids to see.\n"
     }
 ]
+
+
+export const footerDataList = [
+    {
+        text: "Questions? Contact us.",
+        url: "https://help.netflix.com/contactus"
+    },
+    {
+        text: "FAQ",
+        url: "https://help.netflix.com/support/412"
+    },
+    {
+        text: "Help Center",
+        url: "https://help.netflix.com",
+    },
+    {
+        text: "Account",
+        url: "https://www.netflix.com/youraccount",
+    },
+    {
+        text: "Media Center",
+        url: "https://media.netflix.com",
+    },
+    {
+        text: "Investor Relations",
+        url: "https://ir.netflix.com",
+    },
+    {
+        text: "Jobs",
+        url: "https://jobs.netflix.com/jobs",
+    },
+    {
+        text: "Redeem Gift Cards",
+        url: "https://www.netflix.com/redeem",
+    },
+    {
+        text: "Buy Gift Cards",
+        url: "https://www.netflix.com/gift-cards",
+    },
+    {
+        text: "Ways to Watch",
+        url: "https://www.netflix.com/watch",
+    },
+    {
+        text: "Terms of Use",
+        url: "https://www.netflix.com/terms",
+    },
+    {
+        text: "Privacy",
+        url: "https://help.netflix.com/legal/privacy",
+    },
+    {
+        text: "Corporate Information",
+        url: "https://help.netflix.com/legal/corpinfo",
+    },
+    {
+        text: "Contact Us",
+        url: "https://help.netflix.com/contactus",
+    },
+    {
+        text: "Legal Notices",
+        url: "https://help.netflix.com/legal/notices",
+    },
+    {
+        text: "Only on Netflix",
+        url: "https://www.netflix.com/browse/genre/839338",
+    }
+]

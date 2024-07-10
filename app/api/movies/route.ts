@@ -1,4 +1,4 @@
-import prisma from "@/libs/prisma";
+import prisma from "@/utils/prisma";
 import {NextResponse} from "next/server";
 import {unstable_noStore} from "next/cache";
 
