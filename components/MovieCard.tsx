@@ -10,7 +10,7 @@ import useUser from "@/hooks/useUser";
 
 const MovieCard = ({d}: {d: MovieType}) => {
 
-    const setMoreInfoModal = useMoreInfoStore(state => state.setMoreInfoModal);
+    const {setMoreInfoModal} = useMoreInfoStore();
     const {data:userData={movieIds: []}, error: userError} = useUser();
 
     if(userError) {
@@ -42,7 +42,10 @@ const MovieCard = ({d}: {d: MovieType}) => {
                             <FavouriteButton userData={userData} movieData={d} />
                         </div>
 
-                        <button type="button" onClick={() => setMoreInfoModal(d.id)}>
+                        <button type="button" onClick={() => {
+                            setMoreInfoModal(d.id);
+                            console.log(d.id);
+                        }}>
                             <IoChevronDownCircleOutline size={50}/>
                         </button>
                     </div>

@@ -37,13 +37,13 @@ const FavouriteButton = ({userData, movieData}: {userData:{movieIds: string[]} ,
 
     return (
         <>
-            {!userData?.movieIds.includes(movieData?.id) &&
+            {!userData?.movieIds?.includes(movieData?.id) &&
                 (<form action={addFavoriteAction} className="flex items-center">
                     <input type="hidden" name="movieId" defaultValue={movieData?.id}/>
                     <AddFavouriteButton />
                 </form>)
             }
-            {userData?.movieIds.includes(movieData?.id) &&
+            {userData?.movieIds?.includes(movieData?.id) &&
                 (<form action={deleteFavoriteAction} className="flex items-center">
                     <input type="hidden" name="movieId" defaultValue={movieData?.id}/>
                     <DeleteFavouriteButton />

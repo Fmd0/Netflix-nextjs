@@ -2,23 +2,43 @@ import {create} from "zustand";
 
 
 type state = {
-    moreInfoModalIndex: string|null|boolean,
+    moreInfoModalOpen: boolean,
+    moreInfoModalIndex: string|null,
+    signOutModalOpen: boolean
 }
 
 type actions = {
     setMoreInfoModal: (state: string) => void,
     clearMoreInfoModal: () => void,
+    toggleSignOutModal: () => void,
+    closeAllModal: () => void,
+}
+
+const initialState = {
+    moreInfoModalOpen: false,
+    moreInfoModalIndex: null,
+}
+
+const initialModalState = {
+    signOutModalOpen: false,
 }
 
 
+
 export const useMoreInfoStore = create<state & actions>((set) => ({
-    moreInfoModalIndex: null,
+    ...initialState,
+    ...initialModalState,
     setMoreInfoModal: (newData: string) => {
-        set({moreInfoModalIndex: false})
-        setTimeout(() => set({moreInfoModalIndex: newData}), 10);
+        set({moreInfoModalOpen: true, moreInfoModalIndex: newData});
+        window.document.body.style.overflow = 'hidden';
     },
     clearMoreInfoModal: () => {
-        set({moreInfoModalIndex: false})
-        setTimeout(() => set({moreInfoModalIndex: null}), 200);
+        set({moreInfoModalOpen: false, moreInfoModalIndex: null});
+        window.document.body.style.overflow = 'visible';
     },
+    toggleSignOutModal: () => set(state => ({
+        ...initialModalState,
+        signOutModalOpen: !state.signOutModalOpen,
+    })),
+    closeAllModal: () => set({...initialModalState})
 }))

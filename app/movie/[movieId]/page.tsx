@@ -1,7 +1,5 @@
 'use client'
 import { FaArrowLeft } from "react-icons/fa";
-import useSWR from "swr";
-import fetcher from "@/utils/fetcher";
 import Link from "next/link";
 import useMovie from "@/hooks/useMovie";
 

@@ -13,30 +13,32 @@ import useUser from "@/hooks/useUser";
 
 const MoreInfoModal = () => {
 
-    const moreInfoModalIndex = useMoreInfoStore(state => state.moreInfoModalIndex);
-    const clearMoreInfoModal = useMoreInfoStore(state => state.clearMoreInfoModal)
+    const {
+        moreInfoModalOpen,
+        moreInfoModalIndex,
+        clearMoreInfoModal
+    } = useMoreInfoStore();
 
-    const {data:movieData={}, error: movieError} = useMovie(String(moreInfoModalIndex));
+
+    const {data:movieData={}, error: movieError} = useMovie(moreInfoModalIndex);
     const {data: userData={}, error: userError} = useUser();
 
 
-    if(moreInfoModalIndex === null) {
-        return null;
-    }
-
-
     if(movieError || userError) {
-        console.log(movieError, userError);
         return null;
     }
 
 
     return (
         <div className={clsx("w-screen h-screen bg-black bg-opacity-80 fixed z-20 left-0 top-0 grid place-items-center transition-all duration-300",
-            moreInfoModalIndex?"visible":"invisible"
-            )}>
+            moreInfoModalOpen?"opacity-100":"opacity-0 pointer-events-none")}
+             onClick={clearMoreInfoModal}
+        >
+
             <div className={clsx("w-[90%] max-w-[800px] h-[600px] bg-black relative rounded-xl transition-all duration-300",
-                moreInfoModalIndex?"scale-100":"scale-0")}>
+                moreInfoModalOpen?"scale-100":"scale-0")}
+                 onClick={e => e.stopPropagation()}
+            >
                 <div className="h-[400px] bg-transparent relative flex items-end justify-start p-10">
                     <div>
                         <h1 className='text-3xl font-bold mb-5' >{movieData?.title}</h1>
@@ -49,7 +51,10 @@ const MoreInfoModal = () => {
                             <FavouriteButton userData={userData} movieData={movieData} />
                         </div>
                     </div>
-                    <video src="/BigBuckBunny.mp4" autoPlay loop playsInline muted className="rounded-t-xl absolute block z-[-1] top-0 left-0 opacity-50 w-full h-full object-cover object-center" />
+                    {
+                        movieData.videoUrl &&
+                        <video src="/BigBuckBunny.mp4" autoPlay loop playsInline muted className="rounded-t-xl absolute block z-[-1] top-0 left-0 opacity-50 w-full h-full object-cover object-center" />
+                    }
                 </div>
 
                 <div className="bg-gray-900 p-10 h-[200px]">
@@ -58,8 +63,11 @@ const MoreInfoModal = () => {
                     </p>
                     <p>{movieData?.description}</p>
                 </div>
-                <IoCloseOutline size={28} className="text-gray-100 absolute z-[2] top-1 right-1 cursor-pointer" onClick={clearMoreInfoModal} />
+                <div className="absolute z-[2] top-1 right-1 size-[28px] rounded-[999px] bg-gray-500 bg-opacity-50">
+                    <IoCloseOutline size={28} className="text-gray-100 cursor-pointer" onClick={clearMoreInfoModal} />
+                </div>
             </div>
+
         </div>
     )
 }

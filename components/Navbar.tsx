@@ -1,30 +1,47 @@
 'use client'
 import Image from "next/image";
 import {NavData} from "@/utils/data";
-import { IoSearchOutline } from "react-icons/io5";
-import { IoNotificationsOutline } from "react-icons/io5";
+import { IoSearchOutline, IoNotificationsOutline } from "react-icons/io5";
 import { MdArrowDropDown } from "react-icons/md";
 import Link from "next/link";
 import {useEffect, useState} from "react";
 import clsx from "clsx";
 import {signOut} from "next-auth/react";
+import {useMoreInfoStore} from "@/hooks/useMoreInfoStore";
 
 
 
 
 const Navbar = () => {
-
-    const [showSignOut, setShowSignOut] = useState(false);
+    const {
+        signOutModalOpen,
+        toggleSignOutModal,
+        closeAllModal,
+    } = useMoreInfoStore();
     const [showBackground, setShowBackground] = useState(false);
     const [showBrowserBar, setShowBrowserBar] = useState(false);
 
+
     useEffect(() => {
+        window.addEventListener("click", closeAllModal);
+        return () => window.removeEventListener("click", closeAllModal);
+    }, []);
+
+    useEffect(() => {
+        let isThrottle = false;
         const handleScroll = () => {
+            if(isThrottle) {
+                return;
+            }
+            isThrottle = true;
             if (window.scrollY >= 60) {
                 setShowBackground(true)
             } else {
                 setShowBackground(false)
             }
+            setTimeout(() => {
+                isThrottle = false;
+            }, 30);
         }
         window.addEventListener('scroll', handleScroll);
         return () => {
@@ -32,12 +49,9 @@ const Navbar = () => {
         }
     }, []);
 
-    const handleClick = () => {
-        setShowSignOut(a => !a);
-    }
 
     return (
-        <header className={clsx("fixed z-[1] w-screen top-0 left-0 flex items-center justify-between p-4 lg:p-10 flex-wrap",
+        <header className={clsx("fixed z-[1] duration-200 w-screen top-0 left-0 flex items-center justify-between p-4 lg:p-10 flex-wrap",
                 showBackground? "bg-black bg-opacity-70": ""
                 )}>
             <div className="flex items-center gap-8">
@@ -69,25 +83,35 @@ const Navbar = () => {
                 </div>
 
             </div>
-            <div className="flex items-center gap-6 relative">
+            <div className="flex items-center gap-6">
                 <IoSearchOutline className="text-xl"/>
                 <IoNotificationsOutline className="text-xl"/>
-                <div className="flex items-center gap-2 cursor-pointer" onClick={handleClick}>
-                    <p>User</p>
-                    <MdArrowDropDown size={32} className={clsx("text-lg transition-all duration-300",
-                        showSignOut?"rotate-180":"rotate-0"
+
+                {/*user button*/}
+                <div className="relative" onClick={e => e.stopPropagation()}>
+                    <div className="flex items-center gap-2 cursor-pointer" onClick={toggleSignOutModal}>
+                        <p>User</p>
+                        <MdArrowDropDown size={32} className={clsx("text-lg transition-all duration-300",
+                            signOutModalOpen ? "rotate-180" : "rotate-0"
                         )}/>
-                </div>
-                <div className={clsx("bg-black absolute top-10 right-0 w-56 h-32 border-2 border-gray-800 z-[1]",
-                    showSignOut ? "block" : "hidden"
-                )}>
-                    <div className="h-[55%] flex items-center p-4 border-b-gray-600 border-b-2">User</div>
-                    <div className="h-[45%] text-sm grid place-items-center p-4">
-                        <button type="button" onClick={() => signOut()}>
-                            Sign out of Netflix
-                        </button>
+                    </div>
+
+
+                    {/*sign out modal*/}
+                    <div className={clsx("bg-black absolute top-10 right-0 w-56 h-32 border-2 border-gray-800 z-[1]",
+                        signOutModalOpen ? "block" : "hidden"
+                    )}>
+                        <div className="h-[55%] flex items-center p-4 border-b-gray-600 border-b-2">User</div>
+                        <div className="h-[45%] text-sm grid place-items-center p-4">
+                            <button type="button" onClick={() => signOut()}>
+                                Sign out of Netflix
+                            </button>
+                        </div>
+
                     </div>
                 </div>
+
+
             </div>
         </header>
     )

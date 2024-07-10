@@ -1,6 +1,4 @@
 'use client'
-import useSWR from "swr";
-import fetcher from "@/utils/fetcher";
 import {MovieType} from "@/types/movie";
 import React from "react";
 import MovieCard from "@/components/MovieCard";
