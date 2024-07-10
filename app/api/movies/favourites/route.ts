@@ -1,9 +1,10 @@
 import auth from "@/middleware";
 import prisma from "@/utils/prisma";
 
-const GET = auth(async (req) => {
+const GET = async (_: Request) => {
     try {
-        if(!req.auth?.user?.email) {
+        const authData = await auth();
+        if(!authData?.user?.email) {
             return Response.json({msg: "User not valid"}, {
                 status: 401,
             });
@@ -11,7 +12,7 @@ const GET = auth(async (req) => {
 
         const data = await prisma.user.findUnique({
             where: {
-                email: req.auth.user.email,
+                email: authData.user.email,
             },
             include: {
                 movies: true,
@@ -27,7 +28,7 @@ const GET = auth(async (req) => {
         });
     }
 
-})
+}
 
 
 

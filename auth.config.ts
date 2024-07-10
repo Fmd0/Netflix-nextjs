@@ -10,14 +10,15 @@ const nextAuthConfig = {
     },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
-            // console.log("callbacks authorized");
+            console.log("nextUrl.pathname", nextUrl.pathname);
+            // console.log("Callback's authorization");
             if(auth && (nextUrl.pathname.startsWith('/auth') || nextUrl.pathname.startsWith('/landing'))) {
                 // console.log("callbacks authorized redirect to /");
                 return Response.redirect(new URL('/', nextUrl));
             }
             if(!auth && !nextUrl.pathname.startsWith('/auth') && !nextUrl.pathname.startsWith('/landing'))  {
                 // console.log("callbacks authorized redirect to /auth");
-                return Response.redirect(new URL('/landing', nextUrl));
+                return Response.redirect(new URL('/auth', nextUrl));
             }
             return true;
         }

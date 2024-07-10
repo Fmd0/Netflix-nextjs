@@ -15,6 +15,7 @@ const Page = () => {
 
     const handleClick = () => {
         setIsSignIn(a => !a);
+
     }
 
 
@@ -44,7 +45,7 @@ const Page = () => {
                             />
 
                             <input
-                                className="bg-neutral-700 block w-full p-3 outline-0 mt-4 mb-8 rounded-md text-white"
+                                className="bg-neutral-700 block w-full p-3 outline-0 mt-4 mb-3 rounded-md text-white"
                                 type="password"
                                 name="password"
                                 placeholder="Password"
@@ -53,7 +54,7 @@ const Page = () => {
 
                             {
                                 signInError && (
-                                    <p className="text-red-800 mb-2">{signInError}</p>
+                                    <p className="text-red-600 mb-2">{signInError}</p>
                                 )
                             }
 

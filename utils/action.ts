@@ -3,8 +3,6 @@ import {hash} from 'bcrypt';
 import prisma from "@/utils/prisma";
 import {signIn} from "@/auth";
 import {isRedirectError} from "next/dist/client/components/redirect";
-import auth from "@/middleware";
-import {revalidatePath} from "next/cache";
 
 
 export const registerAndSignInAction = async (_: null|string, formData: FormData) => {
@@ -25,7 +23,7 @@ export const registerAndSignInAction = async (_: null|string, formData: FormData
             throw error;
         }
         console.log(error);
-        return 'error';
+        return 'User not valid';
     }
 }
 
@@ -40,59 +38,6 @@ export const signInAction = async (_: null|string, formData: FormData) => {
             throw error;
         }
         console.log(error);
-        return 'error';
+        return 'User not valid';
     }
-}
-
-
-export const addFavouriteAction = async (formData: FormData) => {
-    const movieId = String(formData.get('movieId'));
-    const authData = await auth();
-    if(!authData?.user?.email) {
-        throw new Error('User not valid');
-    }
-
-    const data = await prisma.user.update({
-        where: {
-            email: authData.user.email,
-        },
-        data: {
-            movies: {
-                connect: {
-                    id: movieId,
-                }
-            }
-        }
-    })
-
-    if(!data) {
-        throw new Error('Add not valid');
-    }
-    revalidatePath('/')
-}
-
-export const removeFavouriteAction = async (formData: FormData) => {
-    const movieId = String(formData.get('movieId'));
-    const authData = await auth();
-    if(!authData?.user?.email) {
-        throw new Error('User not valid');
-    }
-
-    const data = await prisma.user.update({
-        where: {
-            email: authData.user.email,
-        },
-        data: {
-            movies: {
-                disconnect: {
-                    id: movieId,
-                }
-            }
-        }
-    })
-
-    if(!data) {
-        throw new Error("Remove not valid");
-    }
-    revalidatePath('/')
 }

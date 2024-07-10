@@ -1,10 +1,10 @@
 import auth from "@/middleware";
 import prisma from "@/utils/prisma";
-import {NextResponse} from "next/server";
 
-const GET = auth(async (req) => {
+const GET = async (_: Request) => {
     try {
-        if(!req.auth?.user?.email) {
+        const authData = await auth();
+        if(!authData?.user?.email) {
             return Response.json({msg: "User not valid"}, {
                 status: 401,
             });
@@ -18,7 +18,7 @@ const GET = auth(async (req) => {
             take: 1,
         });
 
-        return NextResponse.json(data);
+        return Response.json(data);
     }
     catch(err) {
         console.log(err);
@@ -26,7 +26,7 @@ const GET = auth(async (req) => {
             status: 500,
         })
     }
-})
+}
 
 export {
     GET,

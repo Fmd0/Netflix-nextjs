@@ -8,6 +8,7 @@ import {useEffect, useState} from "react";
 import clsx from "clsx";
 import {signOut} from "next-auth/react";
 import {useMoreInfoStore} from "@/hooks/useMoreInfoStore";
+import useUser from "@/hooks/useUser";
 
 
 
@@ -21,11 +22,12 @@ const Navbar = () => {
     const [showBackground, setShowBackground] = useState(false);
     const [showBrowserBar, setShowBrowserBar] = useState(false);
 
+    const {data: userData, error: userError} = useUser();
 
     useEffect(() => {
         window.addEventListener("click", closeAllModal);
         return () => window.removeEventListener("click", closeAllModal);
-    }, []);
+    }, [closeAllModal]);
 
     useEffect(() => {
         let isThrottle = false;
@@ -49,6 +51,9 @@ const Navbar = () => {
         }
     }, []);
 
+    if(userError) {
+        return null;
+    }
 
     return (
         <header className={clsx("fixed z-[1] duration-200 w-screen top-0 left-0 flex items-center justify-between p-4 lg:p-10 flex-wrap",
@@ -90,7 +95,7 @@ const Navbar = () => {
                 {/*user button*/}
                 <div className="relative" onClick={e => e.stopPropagation()}>
                     <div className="flex items-center gap-2 cursor-pointer" onClick={toggleSignOutModal}>
-                        <p>User</p>
+                        <p>{userData?.name||userData?.email?.slice(0,3)||""}</p>
                         <MdArrowDropDown size={32} className={clsx("text-lg transition-all duration-300",
                             signOutModalOpen ? "rotate-180" : "rotate-0"
                         )}/>
@@ -101,7 +106,9 @@ const Navbar = () => {
                     <div className={clsx("bg-black absolute top-10 right-0 w-56 h-32 border-2 border-gray-800 z-[1]",
                         signOutModalOpen ? "block" : "hidden"
                     )}>
-                        <div className="h-[55%] flex items-center p-4 border-b-gray-600 border-b-2">User</div>
+                        <div className="h-[55%] flex items-center p-4 border-b-gray-600 border-b-2">
+                            <p>{userData?.name || userData?.email?.slice(0, 3) || ""}</p>
+                        </div>
                         <div className="h-[45%] text-sm grid place-items-center p-4">
                             <button type="button" onClick={() => signOut()}>
                                 Sign out of Netflix

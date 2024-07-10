@@ -1,11 +1,13 @@
-import {mutate} from "swr";
 import React from "react";
 import {useFormStatus} from "react-dom";
 import {IoAddCircleOutline, IoCheckmarkCircleOutline} from "react-icons/io5";
-import {MovieType} from "@/types/movie";
+import {MovieType, UserType} from "@/utils/type";
+import {mutateMoviesFavourites} from "@/hooks/useMoviesFavourites";
+import {mutateUser} from "@/hooks/useUser";
 
 
-const FavouriteButton = ({userData, movieData}: {userData:{movieIds: string[]} ,movieData:MovieType}) => {
+const FavouriteButton = ({userData, movieData}: {userData:UserType ,movieData:MovieType|null}) => {
+
     const addFavoriteAction = async (formData: FormData) => {
         const rawFormData = Object.fromEntries(formData.entries());
         await fetch("/api/movies/favourites", {
@@ -15,10 +17,7 @@ const FavouriteButton = ({userData, movieData}: {userData:{movieIds: string[]} ,
             },
             body: JSON.stringify(rawFormData),
         });
-
-        const mutateMoviesFavourites = mutate("/api/movies/favourites");
-        const mutateUser = mutate("/api/user");
-        await Promise.all([mutateMoviesFavourites, mutateUser]);
+        await Promise.all([mutateMoviesFavourites(), mutateUser()]);
     }
 
     const deleteFavoriteAction = async (formData: FormData) => {
@@ -30,20 +29,21 @@ const FavouriteButton = ({userData, movieData}: {userData:{movieIds: string[]} ,
             },
             body: JSON.stringify(rawFormData),
         });
-        const mutateMoviesFavourites = mutate("/api/movies/favourites");
-        const mutateUser = mutate("/api/user");
-        await Promise.all([mutateMoviesFavourites, mutateUser]);
+        await Promise.all([mutateMoviesFavourites(), mutateUser()]);
     }
+
+    const isIncluded = userData?.movieIds?.includes(movieData?.id||"");
 
     return (
         <>
-            {!userData?.movieIds?.includes(movieData?.id) &&
+            {!isIncluded &&
                 (<form action={addFavoriteAction} className="flex items-center">
                     <input type="hidden" name="movieId" defaultValue={movieData?.id}/>
                     <AddFavouriteButton />
                 </form>)
             }
-            {userData?.movieIds?.includes(movieData?.id) &&
+
+            {isIncluded &&
                 (<form action={deleteFavoriteAction} className="flex items-center">
                     <input type="hidden" name="movieId" defaultValue={movieData?.id}/>
                     <DeleteFavouriteButton />

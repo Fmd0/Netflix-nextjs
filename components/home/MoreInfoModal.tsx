@@ -1,12 +1,11 @@
 'use client'
-import {IoPlay} from "react-icons/io5";
+import {IoPlay, IoCloseOutline} from "react-icons/io5";
 import Link from "next/link";
 import {useMoreInfoStore} from "@/hooks/useMoreInfoStore";
-import { IoCloseOutline } from "react-icons/io5";
 import clsx from "clsx";
 import React from "react";
 import useMovie from "@/hooks/useMovie";
-import FavouriteButton from "@/components/FavouriteButton";
+import FavouriteButton from "@/components/home/FavouriteButton";
 import useUser from "@/hooks/useUser";
 
 
@@ -20,8 +19,8 @@ const MoreInfoModal = () => {
     } = useMoreInfoStore();
 
 
-    const {data:movieData={}, error: movieError} = useMovie(moreInfoModalIndex);
-    const {data: userData={}, error: userError} = useUser();
+    const {data:movieData, error: movieError} = useMovie(moreInfoModalIndex);
+    const {data: userData, error: userError} = useUser();
 
 
     if(movieError || userError) {
@@ -43,7 +42,7 @@ const MoreInfoModal = () => {
                     <div>
                         <h1 className='text-3xl font-bold mb-5' >{movieData?.title}</h1>
                         <div className="flex gap-4 items-center">
-                            <Link href={`/movie/${movieData.id}`} className="bg-gray-100 text-black rounded-md py-2 px-4 flex items-center gap-1">
+                            <Link href={`/movie/${movieData?.id}`} className="bg-gray-100 text-black rounded-md py-2 px-4 flex items-center gap-1">
                                 <IoPlay size={22} />
                                 Play
                             </Link>
@@ -51,10 +50,13 @@ const MoreInfoModal = () => {
                             <FavouriteButton userData={userData} movieData={movieData} />
                         </div>
                     </div>
+
+                    {/*todolist modify url*/}
                     {
-                        movieData.videoUrl &&
+                        movieData?.videoUrl &&
                         <video src="/BigBuckBunny.mp4" autoPlay loop playsInline muted className="rounded-t-xl absolute block z-[-1] top-0 left-0 opacity-50 w-full h-full object-cover object-center" />
                     }
+
                 </div>
 
                 <div className="bg-gray-900 p-10 h-[200px]">

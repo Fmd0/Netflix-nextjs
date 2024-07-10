@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaAngleRight } from "react-icons/fa6";
 import QuestionList from "@/components/landing/QuestionList";
-import Footer from "@/components/common/Footer";
+import Footer from "@/components/landing/Footer";
 
 
 

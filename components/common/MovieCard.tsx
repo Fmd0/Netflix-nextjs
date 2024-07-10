@@ -3,15 +3,17 @@ import {FaPlayCircle} from "react-icons/fa";
 import {IoChevronDownCircleOutline} from "react-icons/io5";
 import React from "react";
 import {useMoreInfoStore} from "@/hooks/useMoreInfoStore";
-import {MovieType} from "@/types/movie";
-import FavouriteButton from "@/components/FavouriteButton";
+import FavouriteButton from "@/components/home/FavouriteButton";
 import useUser from "@/hooks/useUser";
+import {MovieType} from "@/utils/type";
 
 
-const MovieCard = ({d}: {d: MovieType}) => {
+const MovieCard = ({movieData}: {
+    movieData: MovieType
+}) => {
 
     const {setMoreInfoModal} = useMoreInfoStore();
-    const {data:userData={movieIds: []}, error: userError} = useUser();
+    const {data:userData, error: userError} = useUser();
 
     if(userError) {
         return null;
@@ -19,8 +21,8 @@ const MovieCard = ({d}: {d: MovieType}) => {
 
     return (
         <div className="relative w-full h-full group/trendingCard transition-all">
-            <Link href={`/movie/${d.id}`} className="w-full h-full hidden md:block md:group-hover/trendingCard:opacity-50">
-                <img className="w-full h-full object-cover rounded-lg" src={d.thumbnailUrl} alt="thumbnailUrl"/>
+            <Link href={`/movie/${movieData.id}`} className="w-full h-full hidden md:block md:group-hover/trendingCard:opacity-50">
+                <img className="w-full h-full object-cover rounded-lg" src={movieData.thumbnailUrl} alt="thumbnailUrl"/>
             </Link>
             <div className="md:w-full md:h-full md:absolute md:z-10 md:top-0 transition-all delay-300
                         md:-translate-y-[50%]
@@ -28,23 +30,22 @@ const MovieCard = ({d}: {d: MovieType}) => {
                         md:group-hover/trendingCard:visible
                         md:scale-0
                         md:group-hover/trendingCard:scale-100">
-                <Link href={`/movie/${d.id}`} className="w-full h-full">
-                    <img className="w-full h-full object-cover rounded-lg" src={d.thumbnailUrl} alt="thumbnailUrl"/>
+                <Link href={`/movie/${movieData.id}`} className="w-full h-full">
+                    <img className="w-full h-full object-cover rounded-lg" src={movieData.thumbnailUrl} alt="thumbnailUrl"/>
                 </Link>
                 <div className="w-full h-full bg-gray-900 p-5">
                     <div className="flex items-center justify-between">
 
                         <div className="flex items-center -px-10">
-                            <Link href={`/movie/${d.id}`}>
+                            <Link href={`/movie/${movieData.id}`}>
                                 <FaPlayCircle className="text-white" size={40}/>
                             </Link>
 
-                            <FavouriteButton userData={userData} movieData={d} />
+                            <FavouriteButton userData={userData} movieData={movieData} />
                         </div>
 
                         <button type="button" onClick={() => {
-                            setMoreInfoModal(d.id);
-                            console.log(d.id);
+                            setMoreInfoModal(movieData.id);
                         }}>
                             <IoChevronDownCircleOutline size={50}/>
                         </button>

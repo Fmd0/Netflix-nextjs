@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = () => {
     return (
-        <footer className="mb-8 text-[rgba(255,255,255,0.7)] text-[14px] lg:text-[15px] border-t-[12px] border-[rgb(35,35,35)]">
+        <footer className="mt-10 mb-8 text-[rgba(255,255,255,0.7)] text-[14px] lg:text-[15px] border-t-[12px] border-[rgb(35,35,35)]">
 
             <div className="w-[90%] lg:w-4/5 mx-auto py-10 lg:py-14">
                 <Link href={footerDataList[0].url} className="text-[15px] lg:text-[16px] underline decoration-[rgba(255,255,255,0.7)]">{footerDataList[0].text}</Link>

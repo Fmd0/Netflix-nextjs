@@ -1,9 +1,11 @@
 'use client'
-import Navbar from "@/components/Navbar";
-import MainContent from "@/components/MainContent";
-import Trending from "@/components/Trending";
-import MyList from "@/components/MyList";
-import MoreInfoModal from "@/components/MoreInfoModal";
+import Navbar from "@/components/home/Navbar";
+import MainContent from "@/components/home/MainContent";
+import MoreInfoModal from "@/components/home/MoreInfoModal";
+import MovieList from "@/components/common/MovieList";
+import useMovies from "@/hooks/useMovies";
+import useMoviesFavourites from "@/hooks/useMoviesFavourites";
+import Footer from "@/components/landing/Footer";
 
 
 const Page = () => {
@@ -12,8 +14,8 @@ const Page = () => {
         <>
             <Navbar />
             <MainContent />
-            <Trending />
-            <MyList />
+            <MovieList name="Trending Now" useMovies={useMovies} />
+            <MovieList name="My List" useMovies={useMoviesFavourites} />
             <MoreInfoModal />
         </>
     )
