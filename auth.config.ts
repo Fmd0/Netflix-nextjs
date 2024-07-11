@@ -10,8 +10,7 @@ const nextAuthConfig = {
     },
     callbacks: {
         authorized({ auth, request: { nextUrl } }) {
-            console.log("nextUrl.pathname", nextUrl.pathname);
-            // console.log("Callback's authorization");
+            // console.log("nextUrl.pathname", nextUrl.pathname);
             if(auth && (nextUrl.pathname.startsWith('/auth') || nextUrl.pathname.startsWith('/landing'))) {
                 // console.log("callbacks authorized redirect to /");
                 return Response.redirect(new URL('/', nextUrl));

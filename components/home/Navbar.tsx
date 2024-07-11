@@ -107,7 +107,7 @@ const Navbar = () => {
                         signOutModalOpen ? "block" : "hidden"
                     )}>
                         <div className="h-[55%] flex items-center p-4 border-b-gray-600 border-b-2">
-                            <p>{userData?.name || userData?.email?.slice(0, 3) || ""}</p>
+                            <p>{userData?.name || userData?.email || ""}</p>
                         </div>
                         <div className="h-[45%] text-sm grid place-items-center p-4">
                             <button type="button" onClick={() => signOut()}>

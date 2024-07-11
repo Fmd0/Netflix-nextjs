@@ -91,7 +91,7 @@ const Page = () => {
                             />
 
                             <input
-                                className="bg-neutral-700 block w-full p-3 outline-0 mt-4 mb-8 rounded-md text-white"
+                                className="bg-neutral-700 block w-full p-3 outline-0 mt-4 mb-4 rounded-md text-white"
                                 type="password"
                                 name="password"
                                 placeholder="Password"
@@ -100,7 +100,7 @@ const Page = () => {
 
                             {
                                 registerAndSignInErrorMessage && (
-                                    <p className='text-white'>{registerAndSignInErrorMessage}</p>
+                                    <p className='text-red-600 mb-2'>{registerAndSignInErrorMessage}</p>
                                 )
                             }
 
@@ -123,10 +123,11 @@ const SignInButton = () => {
     return (
         <button
             disabled={pending}
-            className="block w-full bg-red-600 text-center p-2 rounded-md text-white"
+            className={`block w-full text-center p-2 text-white rounded-md duration-200
+            ${pending?"bg-red-300":"bg-red-600"}`}
             type='submit'
         >
-            Sign In
+            {pending?"Loading":"Sign In"}
         </button>
     )
 }
@@ -136,10 +137,11 @@ const RegisterButton = () => {
     return (
         <button
             disabled={pending}
-            className="block w-full bg-red-600 text-center p-2 rounded-md text-white"
+            className={`block w-full text-center p-2 rounded-md text-white
+            ${pending?"bg-red-300":"bg-red-600"}`}
             type='submit'
         >
-            Register
+            {pending?"Loading":"Register"}
         </button>
     )
 }
