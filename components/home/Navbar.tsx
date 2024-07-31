@@ -9,6 +9,7 @@ import clsx from "clsx";
 import {signOut} from "next-auth/react";
 import {useMoreInfoStore} from "@/hooks/useMoreInfoStore";
 import useUser from "@/hooks/useUser";
+import {usePathname} from "next/navigation";
 
 
 
@@ -17,12 +18,15 @@ const Navbar = () => {
     const {
         signOutModalOpen,
         toggleSignOutModal,
+        mobileNavBarModalOpen,
+        toggleMobileNavBarModal,
         closeAllModal,
     } = useMoreInfoStore();
     const [showBackground, setShowBackground] = useState(false);
-    const [showBrowserBar, setShowBrowserBar] = useState(false);
-
     const {data: userData, error: userError} = useUser();
+
+    const pathname = usePathname();
+    const navDataName = NavData.find(navDataItem => navDataItem.href === pathname)?.name||"Home";
 
     useEffect(() => {
         window.addEventListener("click", closeAllModal);
@@ -43,7 +47,7 @@ const Navbar = () => {
             }
             setTimeout(() => {
                 isThrottle = false;
-            }, 30);
+            }, 10);
         }
         window.addEventListener('scroll', handleScroll);
         return () => {
@@ -62,27 +66,38 @@ const Navbar = () => {
             <div className="flex items-center gap-8">
                 <Image src="/logo.png" alt="logo" width={1280} height={346} className='w-24 lg:w-32 '/>
 
+                {/*pc nav bar*/}
                 <ul className="hidden items-center gap-6 lg:flex">
                     {
                         NavData.map((data) => (
-                            <li key={data.id}><Link href={data.href}>{data.name}</Link></li>
+                            <li key={data.id}><Link href={data.href} className={`${pathname===data.href?"font-extrabold":""}`}>{data.name}</Link></li>
                         ))
                     }
                 </ul>
 
+                {/*mobile nav bar*/}
                 <div className="relative lg:hidden">
-                    <button className="flex items-center" onClick={() => setShowBrowserBar(a=> !a)} >
-                        Browser <MdArrowDropDown size={32} className={clsx("transition-all duration-300",
-                        showBrowserBar?"rotate-180":"rotate-0"
-                        )} />
+                    <button className="flex items-center" onClick={(event) => {
+                        event.stopPropagation();
+                        toggleMobileNavBarModal();
+                    }}>
+                        <span>{navDataName}</span>
+                        <MdArrowDropDown className={clsx("transition-all duration-300", mobileNavBarModalOpen?"rotate-180":"rotate-0")}
+                                         size={32}
+                        />
                     </button>
                     <ul className={clsx("flex flex-col w-56 items-center gap-4 absolute top-10 left-0 bg-black px-4 py-6",
-                        showBrowserBar?"visible":"invisible"
+                        mobileNavBarModalOpen?"visible":"invisible"
                         )}>
                         {
-                            NavData.map((data) => (
-                                <li key={data.id}><Link href={data.href}>{data.name}</Link></li>
-                            ))
+                            NavData.map((data) => {
+                                if(data.name === navDataName) {
+                                    return null;
+                                }
+                                return (
+                                    <li key={data.id}><Link href={data.href}>{data.name}</Link></li>
+                                )
+                            })
                         }
                     </ul>
                 </div>

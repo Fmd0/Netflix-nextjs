@@ -1,9 +1,12 @@
-import NextAuth, {CredentialsSignin} from "next-auth";
+import NextAuth from "next-auth";
 import Credentials from "@auth/core/providers/credentials";
 import {PrismaAdapter} from "@auth/prisma-adapter";
 import prisma from "@/utils/prisma";
 import {compare} from 'bcrypt';
 import nextAuthConfig from "@/auth.config";
+import Resend from "@auth/core/providers/resend";
+import Google from "@auth/core/providers/google";
+import GitHub from "@auth/core/providers/github";
 
 
 export const {auth, handlers, signIn, signOut} = NextAuth({
@@ -32,8 +35,10 @@ export const {auth, handlers, signIn, signOut} = NextAuth({
                 return user;
             },
         }),
-        // Resend({
-        //     from: 'auth@nlshop.com.cn'
-        // })
+        Resend({
+            from: "no-reply@nlshop.com.cn"
+        }),
+        Google,
+        GitHub
     ]
 })

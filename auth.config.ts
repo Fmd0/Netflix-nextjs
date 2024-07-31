@@ -15,14 +15,14 @@ const nextAuthConfig = {
                 // console.log("callbacks authorized redirect to /");
                 return Response.redirect(new URL('/', nextUrl));
             }
-            if(!auth && !nextUrl.pathname.startsWith('/auth') && !nextUrl.pathname.startsWith('/landing'))  {
-                // console.log("callbacks authorized redirect to /auth");
-                return Response.redirect(new URL('/auth', nextUrl));
+            if(!auth && !nextUrl.pathname.startsWith('/auth') && !nextUrl.pathname.startsWith('/landing') && !nextUrl.pathname.startsWith("/swagger"))  {
+                console.log("callbacks authorized redirect to /auth");
+                return Response.redirect(new URL('/landing', nextUrl));
             }
             return true;
         }
     },
-    providers: []
+    providers: [],
 } satisfies NextAuthConfig;
 
 export default nextAuthConfig;

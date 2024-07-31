@@ -1,3 +1,4 @@
+import {MovieType} from "@/utils/type";
 
 
 export const NavData = [
@@ -8,29 +9,29 @@ export const NavData = [
     },
     {
         id: '2',
-        name: 'Series',
-        href: '/series'
+        name: 'TV Series',
+        href: '/tv-series'
     },
     {
         id: '3',
-        name: 'Films',
-        href: '/films'
+        name: 'Movies',
+        href: '/movies'
     },
-    {
-        id: '4',
-        name: 'New & Popular',
-        href: '/new&popular'
-    },
+    // {
+    //     id: '4',
+    //     name: 'New & Popular',
+    //     href: '/new&popular'
+    // },
     {
         id: '5',
         name: 'My List',
         href: '/my-list'
     },
-    {
-        id: '6',
-        name: 'Browse by languages',
-        href: '/browse-by-languages'
-    },
+    // {
+    //     id: '6',
+    //     name: 'Browse by languages',
+    //     href: '/browse-by-languages'
+    // },
 ]
 
 
@@ -126,5 +127,86 @@ export const footerDataList = [
     {
         text: "Only on Netflix",
         url: "https://www.netflix.com/browse/genre/839338",
-    }
+    },
+]
+
+
+export const popularTVSeries= [
+    {
+        title: "House of the Dragon",
+        description: "An internal succession war within House Targaryen at the height of its power, 172 years before the birth of Daenerys Targaryen.",
+        videoUrl: "",
+        thumbnailUrl: "https://m.media-amazon.com/images/M/MV5BNjk3NjFhNmQtMzUzOS00ZmRjLWFjZjktNTEwN2Q1Zjg1NWUzXkEyXkFqcGc@._V1_FMjpg_UY5000_.jpg",
+        genre: "Action",
+        duration: "2h 8m",
+    },
+    {
+        title: "Presumed Innocent",
+        description: "A horrific murder upends the Chicago Prosecuting Attorney's' office when one of its own is suspected of the crime.",
+        videoUrl: "",
+        thumbnailUrl: "https://m.media-amazon.com/images/M/MV5BMmVkZWY2ODEtYTMyYy00MDg2LWFkMGUtMjYwOTBhOGViODQzXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UY5334_.jpg",
+        genre: "Suspense Mystery",
+        duration: "1h 41m",
+    },
+
+]
+
+
+export const trendingTVSeries = [
+
+]
+
+export const moviesMainContent: MovieType = {
+    id: "0",
+    title: "Deadpool & Wolverine",
+    description: "Deadpool is offered a place in the Marvel Cinematic Universe by the Time Variance Authority, but instead recruits a variant of Wolverine to save his universe from extinction.",
+    videoUrl: "",
+    thumbnailUrl: "https://image.tmdb.org/t/p/original/9l1eZiJHmhr5jIlthMdJN5WYoff.jpg",
+    genre: "Buddy Comedy",
+    duration: "2h 8m",
+};
+
+export const popularMovies: MovieType[] = [
+    {
+        id: "0",
+        title: "Deadpool & Wolverine",
+        description: "Deadpool is offered a place in the Marvel Cinematic Universe by the Time Variance Authority, but instead recruits a variant of Wolverine to save his universe from extinction.",
+        videoUrl: "",
+        thumbnailUrl: "https://m.media-amazon.com/images/M/MV5BNjk3NjFhNmQtMzUzOS00ZmRjLWFjZjktNTEwN2Q1Zjg1NWUzXkEyXkFqcGc@._V1_FMjpg_UY5000_.jpg",
+        genre: "Buddy Comedy",
+        duration: "2h 8m",
+    },
+    {
+        id: "1",
+        title: "Twisters",
+        description: "A retired tornado-chaser and meteorologist is persuaded to return to Oklahoma to work with a new team and new technologies.",
+        videoUrl: "",
+        thumbnailUrl: "https://m.media-amazon.com/images/M/MV5BZTQ0YjZhNzMtMzMwYi00YTQwLTlhYTgtNDBlZjRhYjJmMzJmXkEyXkFqcGc@._V1_FMjpg_UY12000_.jpg",
+        genre: "Disaster",
+        duration: "2h 2m",
+    },
+    {
+        id: "2",
+        title: "LongLegs",
+        description: "In pursuit of a serial killer, an FBI agent uncovers a series of occult clues that she must solve to end his terrifying killing spree.",
+        videoUrl: "",
+        thumbnailUrl: "https://m.media-amazon.com/images/M/MV5BMmVkZWY2ODEtYTMyYy00MDg2LWFkMGUtMjYwOTBhOGViODQzXkEyXkFqcGdeQXVyMTkxNjUyNQ@@._V1_FMjpg_UY5334_.jpg",
+        genre: "Psychological Horror",
+        duration: "1h 41m",
+    },
+    {
+        id: "3",
+        title: "Maharaja",
+        description: "A barber seeks vengeance after his home is burglarized, cryptically telling police his \"lakshmi\" has been taken, leaving them uncertain if it's a person or object. His quest to recover the elusive \"lakshmi\" unfolds.",
+        videoUrl: "",
+        thumbnailUrl: "https://m.media-amazon.com/images/M/MV5BOTFlMTIxOGItZTk0Zi00MTk2LWJiM2UtMzlhZWYzNjQ4N2Y3XkEyXkFqcGc@._V1_FMjpg_UY2048_.jpg",
+        genre: "Action",
+        duration: "2h 30m",
+    },
+
+]
+
+
+export const trendingMovies = [
+
 ]

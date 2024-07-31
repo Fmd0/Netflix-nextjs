@@ -1,7 +1,7 @@
 import auth from "@/middleware";
 import prisma from "@/utils/prisma";
 
-const GET = async (_: Request) => {
+const GET = async () => {
     try {
         const authData = await auth();
         if(!authData?.user?.email) {

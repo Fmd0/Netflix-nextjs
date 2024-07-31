@@ -7,7 +7,6 @@ export interface MovieType {
     thumbnailUrl: string,
     genre: string,
     duration: string,
-    userIds: string[],
 }
 
 

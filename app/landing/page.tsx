@@ -3,6 +3,7 @@ import Link from "next/link";
 import { FaAngleRight } from "react-icons/fa6";
 import QuestionList from "@/components/landing/QuestionList";
 import Footer from "@/components/landing/Footer";
+import GetStartedForm from "@/components/landing/GetStartedForm";
 
 
 
@@ -20,7 +21,9 @@ const Page = () => {
                         <Link href="/landing">
                             <Image src="/landing/logo.png" alt="logo" width={1280} height={346} className="w-32 lg:w-36"/>
                         </Link>
-                        <Link href="/auth" className="bg-red-600 py-2 px-4 rounded-md text-[13px] font-semibold">
+
+
+                        <Link href="/auth" className="bg-[rgb(229,9,20)] duration-300 hover:bg-[rgb(193,17,25)] py-2 px-4 rounded-md text-[13px] font-semibold">
                             Sign In
                         </Link>
                     </nav>
@@ -31,10 +34,9 @@ const Page = () => {
                             <h3 className="text-xl lg:text-[24px] mb-4">Watch anywhere. Cancel anytime.</h3>
                             <p className="text-lg mb-8">Ready to watch? Enter your email to create or restart your
                                 membership</p>
-                            <Link href="/auth"
-                                  className="bg-red-600 py-2 lg:py-4 rounded-[3px] w-40 lg:w-48 text-lg lg:text-xl font-bold flex items-center justify-center mx-auto">
-                                Get Started <FaAngleRight className="text-white ml-2"/>
-                            </Link>
+
+                            <GetStartedForm />
+
                         </div>
                     </div>
 
@@ -124,10 +126,8 @@ const Page = () => {
                 <div className="w-[80%] mx-auto text-center py-20">
                     <p className="text-xl lg:text-2xl mb-8">Ready to watch? Enter your email to create or restart your
                         membership</p>
-                    <Link href="/auth"
-                          className="bg-red-600 py-2 lg:py-4 rounded-[3px] w-40 lg:w-48 text-lg lg:text-xl font-bold flex items-center justify-center mx-auto">
-                        Get Started <FaAngleRight className="text-white ml-2"/>
-                    </Link>
+
+                    <GetStartedForm />
                 </div>
             </div>
 

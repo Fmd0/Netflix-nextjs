@@ -4,7 +4,6 @@ import Link from "next/link";
 import {useMoreInfoStore} from "@/hooks/useMoreInfoStore";
 import clsx from "clsx";
 import React from "react";
-import useMovie from "@/hooks/useMovie";
 import FavouriteButton from "@/components/home/FavouriteButton";
 import useUser from "@/hooks/useUser";
 
@@ -14,18 +13,14 @@ const MoreInfoModal = () => {
 
     const {
         moreInfoModalOpen,
-        moreInfoModalIndex,
-        clearMoreInfoModal
+        clearMoreInfoModal,
+        moreInfoMovie
     } = useMoreInfoStore();
 
 
-    const {data:movieData, error: movieError} = useMovie(moreInfoModalIndex);
-    const {data: userData, error: userError} = useUser();
-
-
-    if(movieError || userError) {
-        return null;
-    }
+    // const {data:movieData, error: movieError} = useMovie(moreInfoModalIndex);
+    const {data: userData} = useUser();
+    
 
 
     return (
@@ -40,30 +35,34 @@ const MoreInfoModal = () => {
             >
                 <div className="h-[400px] bg-transparent relative flex items-end justify-start p-10">
                     <div>
-                        <h1 className='text-3xl font-bold mb-5' >{movieData?.title}</h1>
+                        <h1 className='text-3xl font-bold mb-5' >{moreInfoMovie?.title}</h1>
                         <div className="flex gap-4 items-center">
-                            <Link href={`/movie/${movieData?.id}`} className="bg-gray-100 text-black rounded-md py-2 px-4 flex items-center gap-1">
+                            <Link href={`/movie/${moreInfoMovie?.id}`} className="bg-gray-100 text-black rounded-md py-2 px-4 flex items-center gap-1">
                                 <IoPlay size={22} />
                                 Play
                             </Link>
 
-                            <FavouriteButton userData={userData} movieData={movieData} />
+                            <FavouriteButton userData={userData} movieData={moreInfoMovie} />
                         </div>
                     </div>
 
-                    {/*todolist modify url*/}
+                    {/*todo modify url*/}
                     {
-                        movieData?.videoUrl &&
+                        moreInfoMovie?.videoUrl &&
                         <video src="/BigBuckBunny.mp4" autoPlay loop playsInline muted className="rounded-t-xl absolute block z-[-1] top-0 left-0 opacity-50 w-full h-full object-cover object-center" />
+                    }
+                    {
+                        !(moreInfoMovie?.videoUrl) && moreInfoMovie?.thumbnailUrl &&
+                        <img src={moreInfoMovie.thumbnailUrl} className="absolute block z-[-1] top-0 left-0 w-full h-full object-cover object-center rounded-t-xl"/>
                     }
 
                 </div>
 
                 <div className="bg-gray-900 p-10 h-[200px]">
                     <p className="mb-5">
-                        <span className="text-green-500 pr-2">New</span> {movieData?.duration+" "+movieData?.genre}
+                        <span className="text-green-500 pr-2">New</span> {moreInfoMovie?.duration+" "+moreInfoMovie?.genre}
                     </p>
-                    <p>{movieData?.description}</p>
+                    <p>{moreInfoMovie?.description}</p>
                 </div>
                 <div className="absolute z-[2] top-1 right-1 size-[28px] rounded-[999px] bg-gray-500 bg-opacity-50">
                     <IoCloseOutline size={28} className="text-gray-100 cursor-pointer" onClick={clearMoreInfoModal} />
