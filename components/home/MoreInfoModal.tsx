@@ -46,13 +46,8 @@ const MoreInfoModal = () => {
                         </div>
                     </div>
 
-                    {/*todo modify url*/}
                     {
-                        moreInfoMovie?.videoUrl &&
-                        <video src="/BigBuckBunny.mp4" autoPlay loop playsInline muted className="rounded-t-xl absolute block z-[-1] top-0 left-0 opacity-50 w-full h-full object-cover object-center" />
-                    }
-                    {
-                        !(moreInfoMovie?.videoUrl) && moreInfoMovie?.thumbnailUrl &&
+                        moreInfoMovie?.thumbnailUrl && moreInfoMovie.thumbnailUrl !== "" &&
                         <img src={moreInfoMovie.thumbnailUrl} className="absolute block z-[-1] top-0 left-0 w-full h-full object-cover object-center rounded-t-xl"/>
                     }
 

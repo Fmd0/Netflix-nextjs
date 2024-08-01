@@ -17,7 +17,7 @@ const FavouriteButton = ({userData, movieData}: {userData:UserType ,movieData:Mo
             },
             body: JSON.stringify(rawFormData),
         });
-        await Promise.all([mutateMoviesFavourites(), mutateUser()]);
+        await Promise.all([mutateMoviesFavourites(movieData?.type||""), mutateUser()]);
     }
 
     const deleteFavoriteAction = async (formData: FormData) => {
@@ -29,7 +29,7 @@ const FavouriteButton = ({userData, movieData}: {userData:UserType ,movieData:Mo
             },
             body: JSON.stringify(rawFormData),
         });
-        await Promise.all([mutateMoviesFavourites(), mutateUser()]);
+        await Promise.all([mutateMoviesFavourites(movieData?.type||""), mutateUser()]);
     }
 
     const isIncluded = userData?.movieIds?.includes(movieData?.id||"");

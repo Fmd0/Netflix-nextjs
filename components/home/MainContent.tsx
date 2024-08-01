@@ -40,13 +40,13 @@ const MainContent = ({movieData}: {
             {/*todo modify url*/}
             <div className="w-screen h-screen absolute z-[-1] top-0 left-0 opacity-75">
                 {
-                    movieData?.videoUrl &&
+                    movieData?.videoUrl && movieData.videoUrl !== "" &&
                     <video src="/BigBuckBunny.mp4" playsInline autoPlay loop muted
                            className="w-full h-full object-cover object-center"/>
                 }
                 {
-                    !(movieData?.videoUrl) && movieData?.thumbnailUrl &&
-                    <img src={movieData.thumbnailUrl} className="w-full h-full object-cover object-center"/>
+                    !(movieData?.videoUrl) && movieData?.backgroundImage && movieData.backgroundImage !== "" &&
+                    <img src={movieData.backgroundImage} className="w-full h-full object-cover object-center"/>
                 }
             </div>
         </>

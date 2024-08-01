@@ -7,6 +7,10 @@ export interface MovieType {
     thumbnailUrl: string,
     genre: string,
     duration: string,
+    type: string,
+    trailerUrl?: string,
+    backgroundImage?: string,
+
 }
 
 

@@ -10,8 +10,8 @@ import useMovies from "@/hooks/useMovies";
 
 const Page = () => {
 
-    const {data:{movies: myListMovies} = {movies: []}} = useMoviesFavourites("Movies");
-    const {data:{movies: moviesMovies } = {movies: []}} = useMovies("Movies");
+    const {data:{movies: myListMovies} = {movies: []}} = useMoviesFavourites("TVSeries");
+    const {data:{movies: moviesMovies } = {movies: []}} = useMovies("TVSeries");
 
     return (
         <>

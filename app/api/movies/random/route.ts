@@ -10,11 +10,11 @@ const GET = async () => {
             });
         }
 
-        const movieCount = await prisma.movie.count();
-        const random = Math.floor(Math.random() * movieCount);
+        // const movieCount = await prisma.movie.count();
+        // const random = Math.floor(Math.random() * movieCount);
 
         const data = await prisma.movie.findFirst({
-            skip: random,
+            skip: 0,
             take: 1,
         });
 
