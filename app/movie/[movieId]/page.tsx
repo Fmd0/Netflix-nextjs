@@ -24,10 +24,9 @@ const Page = ({params:{movieId}}: {
                 <span className="text-lg font-bold md:text-3xl">{data?.title}</span>
             </nav>
 
-            {/*todo modify url*/}
             {
                 data?.videoUrl && data.videoUrl !== "" &&
-                <video className="w-full h-full" src="/BigBuckBunny.mp4" autoPlay controls muted/>
+                <video className="w-full h-full" src={data.videoUrl} autoPlay controls muted/>
             }
             {
                 !(data?.videoUrl) && data?.trailerUrl && data.trailerUrl !== "" &&

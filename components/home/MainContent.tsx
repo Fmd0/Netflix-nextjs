@@ -37,11 +37,10 @@ const MainContent = ({movieData}: {
                 </div>
             </main>
 
-            {/*todo modify url*/}
             <div className="w-screen h-screen absolute z-[-1] top-0 left-0 opacity-75">
                 {
                     movieData?.videoUrl && movieData.videoUrl !== "" &&
-                    <video src="/BigBuckBunny.mp4" playsInline autoPlay loop muted
+                    <video src={movieData.videoUrl} playsInline autoPlay loop muted
                            className="w-full h-full object-cover object-center"/>
                 }
                 {

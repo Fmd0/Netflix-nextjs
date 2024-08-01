@@ -140,13 +140,18 @@ const Page = () => {
 const SignInButton = () => {
     const {pending} = useFormStatus();
     return (
-        <button
-            disabled={pending}
-            className={`block w-full text-center py-2.5 text-white rounded-md duration-200
-            ${pending ? "bg-red-300" : "bg-red-600"}`}
-            type='submit'
+        <button className="w-full text-center py-2.5 text-white rounded-md duration-200 grid place-items-center bg-red-600"
+                disabled={pending}
+                type='submit'
         >
-            {pending ? "Loading" : "Sign In"}
+            {
+                pending ?
+                <div
+                    className="size-6 animate-spin rounded-[50%] border-t-white border-x-white border-b-transparent border-[4px]">
+                </div>
+                : "Sign In"
+            }
+
         </button>
     )
 }
@@ -156,11 +161,16 @@ const RegisterButton = () => {
     return (
         <button
             disabled={pending}
-            className={`block w-full text-center py-2.5 rounded-md text-white
-            ${pending ? "bg-red-300" : "bg-red-600"}`}
+            className="w-full text-center py-2.5 rounded-md text-white grid place-items-center bg-red-600"
             type='submit'
         >
-            {pending ? "Loading" : "Register"}
+            {
+                pending ?
+                    <div
+                        className="size-6 animate-spin rounded-[50%] border-t-white border-x-white border-b-transparent border-[4px]">
+                    </div>
+                    : "Sign Up"
+            }
         </button>
     )
 }
