@@ -41,3 +41,4 @@ next-env.d.ts
 
 /public/BigBuckBunny.mp4
 /public/img.png
+package-lock.json
