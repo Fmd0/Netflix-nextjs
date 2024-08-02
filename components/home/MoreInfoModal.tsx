@@ -48,7 +48,7 @@ const MoreInfoModal = () => {
 
                     {
                         moreInfoMovie?.thumbnailUrl && moreInfoMovie.thumbnailUrl !== "" &&
-                        <img src={moreInfoMovie.thumbnailUrl} className="absolute block z-[-1] top-0 left-0 w-full h-full object-cover object-center rounded-t-xl"/>
+                        <img src={moreInfoMovie.thumbnailUrl} alt="thumbnail" className="absolute block z-[-1] top-0 left-0 w-full h-full object-cover object-center rounded-t-xl"/>
                     }
 
                 </div>

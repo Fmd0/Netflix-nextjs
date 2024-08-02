@@ -147,7 +147,7 @@ const SignInButton = () => {
             {
                 pending ?
                 <div
-                    className="size-6 animate-spin rounded-[50%] border-t-white border-x-white border-b-transparent border-[4px]">
+                    className="size-6 animate-spin rounded-[50%] border-t-white border-x-white border-b-transparent border-[3px]">
                 </div>
                 : "Sign In"
             }
@@ -167,7 +167,7 @@ const RegisterButton = () => {
             {
                 pending ?
                     <div
-                        className="size-6 animate-spin rounded-[50%] border-t-white border-x-white border-b-transparent border-[4px]">
+                        className="size-6 animate-spin rounded-[50%] border-t-white border-x-white border-b-transparent border-[3px]">
                     </div>
                     : "Sign Up"
             }
