@@ -1,9 +1,10 @@
 'use server'
-import {hash} from 'bcrypt';
+import {hash} from 'bcryptjs';
 import prisma from "@/utils/prisma";
 import {signIn} from "@/auth";
 import {isRedirectError} from "next/dist/client/components/redirect";
 import z from "zod"
+
 
 const RegisterFormSchema = z.object({
     email: z.string(),
@@ -24,7 +25,9 @@ export const registerAndSignInAction = async (_: null|string, formData: FormData
         await prisma.user.create({
             data: parseResult.data,
         });
-        await signIn('credentials', formData);
+        await signIn('credentials', formData, {
+
+        });
         return 'success';
 
     }

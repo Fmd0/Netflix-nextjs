@@ -1,4 +1,4 @@
-import auth from "@/middleware";
+import {auth} from "@/auth";
 import prisma from "@/utils/prisma";
 
 const GET = async (_: Request, {params: {movieId}}: { params: { movieId: string } }) => {

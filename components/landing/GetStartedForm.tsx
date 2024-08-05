@@ -17,7 +17,7 @@ const GetStartedForm = () => {
                 redirect: false,
             });
             setIsSendEmailSuccess(true);
-        }} className="w-4/5 max-w-[600px] mx-auto flex gap-2">
+        }} className="w-4/5 max-w-[600px] mx-auto flex gap-2 text-nowrap">
 
             <div className={`relative flex-1 border-[1px] rounded-[4px] duration-200
             ${hasBeenInput?"bg-[rgba(70,90,126,0.4)]":"bg-[rgba(22,22,22,0.6)]"}

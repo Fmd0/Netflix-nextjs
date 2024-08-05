@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import { FaAngleRight } from "react-icons/fa6";
 import QuestionList from "@/components/landing/QuestionList";
 import Footer from "@/components/landing/Footer";
 import GetStartedForm from "@/components/landing/GetStartedForm";
@@ -123,7 +122,7 @@ const Page = () => {
 
             {/*bottom button*/}
             <div className="border-b-neutral-800 mb-20">
-                <div className="w-[80%] mx-auto text-center py-20">
+                <div className="mx-auto text-center py-20">
                     <p className="text-xl lg:text-2xl mb-8">Ready to watch? Enter your email to create or restart your
                         membership</p>
 

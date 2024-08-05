@@ -36,8 +36,8 @@ const Page = () => {
                                 <h1 className='text-white text-3xl font-semibold'>Sign in</h1>
 
                                 <div className="flex flex-col gap-4 mt-6 mb-4">
-                                    <InputItem placeholder="Email address" inputName="email" inputType="email" />
-                                    <InputItem placeholder="Password" inputName="password" inputType="password" />
+                                    <InputItem placeholder="Email address" inputName="email" inputType="email" inputValue="1@1.com"/>
+                                    <InputItem placeholder="Password" inputName="password" inputType="password" inputValue="1"/>
                                 </div>
                                 {
                                     signInError && (
@@ -110,9 +110,9 @@ const Page = () => {
                             <h1 className='text-white text-3xl font-semibold'>Register</h1>
 
                             <div className="flex flex-col gap-4 mt-6 mb-4">
-                                <InputItem placeholder="Name" inputName="name" inputType="text" />
-                                <InputItem placeholder="Email address" inputName="email" inputType="email" />
-                                <InputItem placeholder="Password" inputName="password" inputType="password" />
+                                <InputItem placeholder="Name" inputName="name" inputType="text" inputValue=""/>
+                                <InputItem placeholder="Email address" inputName="email" inputType="email" inputValue=""/>
+                                <InputItem placeholder="Password" inputName="password" inputType="password" inputValue=""/>
                             </div>
 
 

@@ -1,8 +1,4 @@
-import nextAuthConfig from "@/auth.config";
-import NextAuth from "next-auth";
-
-
-const {auth} = NextAuth(nextAuthConfig);
+import {auth} from "@/auth";
 
 export default auth;
 

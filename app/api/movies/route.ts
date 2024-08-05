@@ -1,5 +1,5 @@
 import prisma from "@/utils/prisma";
-import auth from "@/middleware";
+import {auth} from "@/auth";
 import {NextRequest} from "next/server";
 
 
