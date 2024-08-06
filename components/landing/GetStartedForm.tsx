@@ -40,8 +40,8 @@ const GetStartedForm = () => {
                        }}
                        required
                 />
-                <div className={`absolute left-4 text-neutral-200 duration-200
-                ${isOnFocus||inputValue!==""?"top-1 text-[10px] lg:text-[12px]":"top-1/2 -translate-y-1/2 text-[16px] lg:text-[17px]"}
+                <div className={`absolute left-4 text-neutral-200 duration-200 text-[16px] origin-top-left transition-all
+                ${isOnFocus||inputValue!==""?"top-1 scale-75":"top-1/2 -translate-y-1/2 scale-100"}
                 `}>Email address</div>
 
                 <div className={`${isSendEmailSuccess?"":"hidden"} absolute top-[calc(100%+4px)] left-1 text-start text-green-500 text-[12px]`}>A sign in link has been sent to your email address.</div>

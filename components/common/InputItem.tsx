@@ -27,8 +27,8 @@ const InputItem = ({placeholder, inputName, inputType, inputValue}: {
                 autoComplete="off"
                 required
             />
-            <div className={`absolute left-4 font-light text-neutral-200 duration-200
-            ${isFocused || inputValueState!==""?"text-[12px] top-1":"text-[16px] top-1/2 -translate-y-1/2"}
+            <div className={`absolute left-4 font-light text-neutral-200 duration-200 text-[16px] origin-top-left
+            ${isFocused || inputValueState!==""?"scale-75 top-1":"top-1/2 -translate-y-1/2"}
             `}>{placeholder}</div>
         </div>
     )
